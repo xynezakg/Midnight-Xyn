@@ -1,0 +1,34 @@
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+/**
+ * Bidveil Counter Contract
+ * ════════════════════════════════════════════════════════════
+ * PUBLIC LEDGER STATE:
+ *   - counter: Uint<64> (On-chain public counter, visible to anyone)
+ *
+ * PRIVATE WITNESS:
+ *   - secretDelta: Uint<64> (Private circuit input witness, never exposed on-chain)
+ *
+ * DISCLOSE:
+ *   - disclose(delta): Deliberately discloses the value of delta to update the public counter.
+ * ════════════════════════════════════════════════════════════
+ */
+
+export ledger counter: Uint<64>;
+
+witness secretDelta(): Uint<64>;
+
+export circuit incrementBy(delta: Uint<64>): [] {
+    counter = (counter + disclose(delta)) as Uint<64>;
+}
+
+export circuit incrementWithPrivateWitness(): [] {
+    const delta = secretDelta();
+    counter = (counter + disclose(delta)) as Uint<64>;
+}
+
+export circuit reset(): [] {
+    counter = 0 as Uint<64>;
+}
