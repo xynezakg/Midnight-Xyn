@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.midnight-state.json
+.midnight-wallet-state/
+midnight-level-db/
+*.log
