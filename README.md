@@ -1,4 +1,9 @@
 # Bidveil
+
+<p align="center">
+  <img src="docs/images/logo.jpg" alt="Bidveil Logo" width="200" />
+</p>
+
 [![CI](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml/badge.svg)](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml)
 
 > Privacy-preserving sealed-bid auction and confidential procurement dApp built on the Midnight Network.
