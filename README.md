@@ -1,7 +1,11 @@
 # Bidveil
 
 <p align="center">
-  <img src="docs/images/logo.jpg" alt="Bidveil Logo" width="200" />
+  <img src="docs/images/logo.jpg" alt="Bidveil Logo" width="180" />
+</p>
+
+<p align="center">
+  <img src="docs/images/banner.jpg" alt="Bidveil Banner" width="100%" />
 </p>
 
 [![CI](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml/badge.svg)](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml)
@@ -16,11 +20,21 @@
 |----------|------------------------------------------------------------------|
 | Preprod  | `7ff3da84fceba28bdae68fa8ada604e45bbe191f938873b34857773e1c1e8ec2` |
 
-## Level 5 — User Validation
-- **Target:** 50 Preprod users
-- **Current:** 50 / 50 Verified Preprod Users
-- See [USERS.md](USERS.md) for full verified wallet addresses list.
-- See [docs/FEEDBACK.md](docs/FEEDBACK.md) for raw feedback logs, themes, and iterated changes.
+## Level 5 — User Validation & Feedback
+
+Bidveil has undergone comprehensive user testing on the Midnight Network Preprod testnet across developer and blockchain communities.
+
+- **User Target:** 50 Preprod users
+- **Current Status:** **50 / 50 Verified Preprod Users**
+- **Verified Addresses Log:** See [USERS.md](USERS.md) for the complete list of 50 verified `mn_addr_preprod1...` wallet addresses.
+- **Feedback & Iteration Log:** See [docs/FEEDBACK.md](docs/FEEDBACK.md) for raw tester feedback, recurring themes, and implemented improvements.
+
+### Key Iterations from User Feedback
+1. **Auto-Populating Valid Reserve Bid:** Clicking any active tender pre-fills the input with a valid qualifying bid above the reserve price, eliminating underbidding input errors.
+2. **Exploratory Verification:** Direct on-chain transaction explorer links added to the proof confirmation card.
+3. **Local Prover Visual Feedback:** Integrated an animated CPU prover banner during client-side zk-SNARK constraint synthesis.
+
+---
 
 ## What This Product Does
 
@@ -43,8 +57,8 @@ By combining browser-local zero-knowledge proof generation via the Lace Midnight
 
 ## Tech Stack
 
-- **Smart Contract Language:** Compact (v0.33 toolchain / v0.23+ language spec)
-- **Zero-Knowledge Runtime:** `@midnight-ntwrk/compact-runtime` (v0.18.0-rc.1)
+- **Smart Contract Language:** Compact (v0.34 toolchain / v0.23+ language spec)
+- **Zero-Knowledge Runtime:** `@midnight-ntwrk/compact-runtime` (v0.19.0)
 - **Wallet & DApp Connector:** Lace Midnight Wallet (`@midnight-ntwrk/dapp-connector-api`)
 - **Frontend Framework:** React 19, TypeScript, Vite, Tailwind CSS, Lucide Icons
 - **CI/CD:** GitHub Actions (automated Compact installer, contract compilation, unit tests, and production build)
@@ -106,4 +120,4 @@ See [docs/USAGE.md](docs/USAGE.md) for a step-by-step user guide and troubleshoo
 
 ## Product X Profile
 
-`https://x.com/bidveil_zk` *(Created for Midnight Builder Challenge Level 4)*
+[https://x.com/bidveil_zk](https://x.com/bidveil_zk) *(Created for Midnight Builder Challenge)*
