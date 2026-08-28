@@ -16,6 +16,12 @@
 |----------|------------------------------------------------------------------|
 | Preprod  | `7ff3da84fceba28bdae68fa8ada604e45bbe191f938873b34857773e1c1e8ec2` |
 
+## Level 5 — User Validation
+- **Target:** 50 Preprod users
+- **Current:** 50 / 50 Verified Preprod Users
+- See [USERS.md](USERS.md) for full verified wallet addresses list.
+- See [docs/FEEDBACK.md](docs/FEEDBACK.md) for raw feedback logs, themes, and iterated changes.
+
 ## What This Product Does
 
 In traditional public blockchains and standard procurement platforms, all transactions, balances, and bids are transparent. This creates severe market distortions, including front-running, bid-sniping, supplier price discrimination, and leakage of confidential corporate bidding strategies. Organizations seeking to run honest, competitive sealed-bid auctions are forced to rely on centralized escrow intermediaries that can be compromised or act dishonestly.
