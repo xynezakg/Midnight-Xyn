@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "compile": "compact update 2>/dev/null || ~/.local/bin/compact update 2>/dev/null || true; compact compile contracts/counter.compact managed/counter || ~/.local/bin/compact compile contracts/counter.compact managed/counter",
-    "test": "tsx --test tests/counter.test.ts",
+    "compile": "compact update 2>/dev/null || ~/.local/bin/compact update 2>/dev/null || true; compact compile contracts/bidveil.compact managed/bidveil || ~/.local/bin/compact compile contracts/bidveil.compact managed/bidveil",
+    "test": "tsx --test tests/bidveil.test.ts",
+    "test:all": "tsx --test tests/bidveil.test.ts tests/counter.test.ts",
     "deploy": "npx tsx src/deploy.ts",
     "network": "npx tsx src/network.ts"
   },

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { BIDVEIL_CONTRACT_CONFIG } from '../utils/contract';
 
 export interface MidnightState {
   isConnected: boolean;
@@ -7,7 +8,9 @@ export interface MidnightState {
   isConnecting: boolean;
   error: string | null;
   contractAddress: string;
-  counterValue: bigint;
+  bidCount: bigint;
+  reservePrice: bigint;
+  isOpen: boolean;
   balance: string;
   isProving: boolean;
   txHash: string | null;
@@ -21,8 +24,10 @@ export function useMidnight() {
     network: 'Preprod',
     isConnecting: false,
     error: null,
-    contractAddress: '7ff3da84fceba28bdae68fa8ada604e45bbe191f938873b34857773e1c1e8ec2',
-    counterValue: 42n,
+    contractAddress: BIDVEIL_CONTRACT_CONFIG.preprodAddress,
+    bidCount: 3n,
+    reservePrice: 100_000n,
+    isOpen: true,
     balance: '5,000.00 tNIGHT',
     isProving: false,
     txHash: null,
@@ -155,7 +160,10 @@ export function useMidnight() {
 
   // Execute Circuit Call with ZK Proof generation
   const executeCircuitCall = useCallback(
-    async (circuitName: 'incrementBy' | 'incrementWithPrivateWitness' | 'reset', privateInputVal: number) => {
+    async (
+      circuitName: 'initializeTender' | 'submitSealedBid' | 'submitDisclosedBid' | 'closeTender' | 'resetTender' | string,
+      inputValue: number
+    ) => {
       if (!state.isConnected) {
         setState((prev) => ({ ...prev, error: 'Please connect your Lace wallet before calling circuits.' }));
         return;
@@ -164,22 +172,38 @@ export function useMidnight() {
       setState((prev) => ({ ...prev, isProving: true, error: null, txHash: null }));
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+        // Simulating client zero-knowledge proof generation in browser
+        await new Promise((resolve) => setTimeout(resolve, 2200));
 
         const simulatedTxId = Array.from({ length: 32 }, () =>
           Math.floor(Math.random() * 16).toString(16)
         ).join('');
 
         setState((prev) => {
-          let nextCounter = prev.counterValue;
-          if (circuitName === 'incrementBy') nextCounter += BigInt(privateInputVal);
-          else if (circuitName === 'incrementWithPrivateWitness') nextCounter += BigInt(privateInputVal);
-          else if (circuitName === 'reset') nextCounter = 0n;
+          let nextBidCount = prev.bidCount;
+          let nextReserve = prev.reservePrice;
+          let nextOpen = prev.isOpen;
+
+          if (circuitName === 'initializeTender') {
+            nextReserve = BigInt(inputValue || 100000);
+            nextBidCount = 0n;
+            nextOpen = true;
+          } else if (circuitName === 'submitSealedBid' || circuitName === 'incrementWithPrivateWitness' || circuitName === 'incrementBy') {
+            nextBidCount += 1n;
+          } else if (circuitName === 'closeTender') {
+            nextOpen = false;
+          } else if (circuitName === 'resetTender' || circuitName === 'reset') {
+            nextBidCount = 0n;
+            nextReserve = 0n;
+            nextOpen = false;
+          }
 
           return {
             ...prev,
             isProving: false,
-            counterValue: nextCounter,
+            bidCount: nextBidCount,
+            reservePrice: nextReserve,
+            isOpen: nextOpen,
             txHash: simulatedTxId,
             error: null,
           };

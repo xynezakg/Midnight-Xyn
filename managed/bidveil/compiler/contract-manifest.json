@@ -1,0 +1,138 @@
+{
+  "manifest-version": "1",
+  "compiler-version": "0.33.0",
+  "language-version": "0.25.0",
+  "runtime-version": "0.18.0-rc.1",
+  "compiler": {
+    "type": "directory",
+    "contract-info.json": {
+      "type": "file",
+      "size": 2473,
+      "hash": "d5ca7e1c1c1268be5d7169024ca636abed9fb6b24c6815aeb1c0f2b60e100dcb"
+    }
+  },
+  "contract": {
+    "type": "directory",
+    "index.d.ts": {
+      "type": "file",
+      "size": 3057,
+      "hash": "272ea5530c5e4fc84b9cf05a346f4adcc4a5b24e5516a4686fad03a152c5b2d9"
+    },
+    "index.js": {
+      "type": "file",
+      "size": 46914,
+      "hash": "88dbf78d18d4149906dedc842bb19bfd66c5613fcb31715683fc571afb8e20d9"
+    },
+    "index.js.map": {
+      "type": "file",
+      "size": 1684,
+      "hash": "8b69cbb0a5f68995123f888ff50ea848640024da4dd96752a6c8c08f59f3bd0b"
+    }
+  },
+  "zkir": {
+    "type": "directory",
+    "closeTender.bzkir": {
+      "type": "file",
+      "size": 73,
+      "hash": "829952d01236f6d9dadb8d038e06c215bf3da9633355a4a7e086c39e0bbb9f6a"
+    },
+    "closeTender.zkir": {
+      "type": "file",
+      "size": 1003,
+      "hash": "2aa8e22e8ee0c6594b517d0f276d3ab0430e726b0b9590756823baffe079b7be"
+    },
+    "initializeTender.bzkir": {
+      "type": "file",
+      "size": 184,
+      "hash": "c2c51b0fadbc2d9ccd291e840245c8e0d456d26080bc13ae39efb0ab1a7c464a"
+    },
+    "initializeTender.zkir": {
+      "type": "file",
+      "size": 3061,
+      "hash": "0d4d20dc33eb6a3978bc264f8ccc34d5b84cc874a4c95708e37a7ba995df5d8f"
+    },
+    "resetTender.bzkir": {
+      "type": "file",
+      "size": 180,
+      "hash": "b737ba8516c60e7ab8a9f84c3709efb7460382f3b4ed6e7e6bf83d05dcdc244f"
+    },
+    "resetTender.zkir": {
+      "type": "file",
+      "size": 3007,
+      "hash": "0847be9575c379e4d861ae5571fe6db31e857c7e53dd37df1fd475bebbe1a81f"
+    },
+    "submitDisclosedBid.bzkir": {
+      "type": "file",
+      "size": 300,
+      "hash": "fe861e13f71ef063c1556a16df55c19c2417200e7dafc788908418b171c710f9"
+    },
+    "submitDisclosedBid.zkir": {
+      "type": "file",
+      "size": 4974,
+      "hash": "ec411aa62c426bc353cf6f9fa2338dd8f7e6f972a4a3c7eecae4488b9fe0ab62"
+    },
+    "submitSealedBid.bzkir": {
+      "type": "file",
+      "size": 205,
+      "hash": "2d4f26ffe2ed9edf5488b1917adccbd673c1beafbcec419a554956de25b6155b"
+    },
+    "submitSealedBid.zkir": {
+      "type": "file",
+      "size": 3330,
+      "hash": "74cb71519cc66ac13cb6782182080778214d3b0213c1d85d6bb86454327e1748"
+    }
+  },
+  "keys": {
+    "type": "directory",
+    "closeTender.prover": {
+      "type": "file",
+      "size": 14103,
+      "hash": "3ad606c290b5ff0417ead2ae74d32afff16cd1ebcc24dcec59f5896b07e6bedd"
+    },
+    "closeTender.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "2faf3a34aed8912b1166881ca3bde2cbcdd70789b5f1f7285835a07ebd22342c"
+    },
+    "initializeTender.prover": {
+      "type": "file",
+      "size": 41386,
+      "hash": "745155b7d4caab97eae78685337e21c3db4a1f6e6af5864300fc3be19df19908"
+    },
+    "initializeTender.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "8f9062654b5bb207b3134aed61eeda438567b8d5ef9292ea675e987514ae0530"
+    },
+    "resetTender.prover": {
+      "type": "file",
+      "size": 22501,
+      "hash": "934960ffe74da1ebde8dc6a7e754ae8e4d37ea0e4dbd56cd328f843f3d18dc59"
+    },
+    "resetTender.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "3e49509061282c04c40ba40e54b55e404bdcbffc557b6ac9e789052f6169cd0f"
+    },
+    "submitDisclosedBid.prover": {
+      "type": "file",
+      "size": 148910,
+      "hash": "17ffa79d90200ba5341376da2f224a06f4dde5fc6d145678aa8a65fae5ce0b70"
+    },
+    "submitDisclosedBid.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "ab52ee9eb2d1ca6a27d366f19fcc1bf43b034d8139030f47481c7cb0a88ede9d"
+    },
+    "submitSealedBid.prover": {
+      "type": "file",
+      "size": 148731,
+      "hash": "6763f9000dcd448df84b785f4921ab55d9f853a8559025bd6854ec926bcc81bf"
+    },
+    "submitSealedBid.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "a9af7b37ac45d9822947fec008b8119126e3752e66eb8b91febbea8b34106611"
+    }
+  }
+}

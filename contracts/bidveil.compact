@@ -1,0 +1,67 @@
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+/**
+ * Bidveil - Confidential Sealed-Bid Procurement Contract
+ * ════════════════════════════════════════════════════════════
+ * PUBLIC LEDGER STATE:
+ *   - reservePrice: Uint<64> (Minimum qualifying reserve amount, visible on-chain)
+ *   - bidCount: Uint<64> (Total count of verified confidential bids, visible on-chain)
+ *   - highestDisclosedBid: Uint<64> (Highest verified tender metric, visible on-chain)
+ *   - isOpen: Boolean (Whether the procurement tender is currently accepting bids)
+ *
+ * PRIVATE WITNESSES:
+ *   - secretBidAmount(): Uint<64> (Confidential supplier bid amount, strictly local)
+ *   - secretBidSalt(): Uint<64> (Confidential bidder randomness/salt, strictly local)
+ *
+ * PRIVACY MODEL & ZERO-KNOWLEDGE LOGIC:
+ *   - Bidders prove their bid satisfies (secretBidAmount >= reservePrice) without
+ *     disclosing the numerical amount to the public, competitors, or validators.
+ *   - State transition updates public bidCount on-chain while keeping bid values private.
+ *   - disclose() is deliberately utilized only for public initialization and settlement metrics.
+ * ════════════════════════════════════════════════════════════
+ */
+
+export ledger reservePrice: Uint<64>;
+export ledger bidCount: Uint<64>;
+export ledger highestDisclosedBid: Uint<64>;
+export ledger isOpen: Boolean;
+
+witness secretBidAmount(): Uint<64>;
+witness secretBidSalt(): Uint<64>;
+
+export circuit initializeTender(reserve: Uint<64>): [] {
+    reservePrice = disclose(reserve);
+    bidCount = 0 as Uint<64>;
+    highestDisclosedBid = 0 as Uint<64>;
+    isOpen = true;
+}
+
+export circuit submitSealedBid(): [] {
+    assert(isOpen, "Tender is not open for bidding");
+    const bid = secretBidAmount();
+    assert(bid >= reservePrice, "Bid amount is below the minimum reserve price");
+    bidCount = (bidCount + 1) as Uint<64>;
+}
+
+export circuit submitDisclosedBid(bid: Uint<64>): [] {
+    assert(isOpen, "Tender is not open for bidding");
+    const disclosedBid = disclose(bid);
+    assert(disclosedBid >= reservePrice, "Bid amount is below the minimum reserve price");
+    bidCount = (bidCount + 1) as Uint<64>;
+    if (disclosedBid > highestDisclosedBid) {
+        highestDisclosedBid = disclosedBid;
+    }
+}
+
+export circuit closeTender(): [] {
+    isOpen = false;
+}
+
+export circuit resetTender(): [] {
+    reservePrice = 0 as Uint<64>;
+    bidCount = 0 as Uint<64>;
+    highestDisclosedBid = 0 as Uint<64>;
+    isOpen = false;
+}

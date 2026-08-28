@@ -1,7 +1,7 @@
 # Bidveil
 [![CI](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml/badge.svg)](https://github.com/xynezakg/Midnight-Xyn/actions/workflows/ci.yml)
 
-> A privacy-preserving sealed-bidding and confidential procurement dApp built on the Midnight Network.
+> Privacy-preserving sealed-bid auction and confidential procurement dApp built on the Midnight Network.
 
 ## Live Demo
 [https://bidveil.vercel.app/](https://bidveil.vercel.app/)
@@ -10,35 +10,42 @@
 | Network  | Address                                                          |
 |----------|------------------------------------------------------------------|
 | Preprod  | `7ff3da84fceba28bdae68fa8ada604e45bbe191f938873b34857773e1c1e8ec2` |
-| Preview  | `7ff3da84fceba28bdae68fa8ada604e45bbe191f938873b34857773e1c1e8ec2` |
 
-## What This Does
-Bidveil is a decentralized, zero-knowledge smart contract application that allows organizations and suppliers to participate in confidential sealed-bid procurement. Using zero-knowledge proofs generated locally in the browser via the Lace Midnight Wallet DApp Connector, users can submit private bids and transition contract state without exposing their underlying financial figures, bid amounts, or strategic calculations to the public or competitors.
+## What This Product Does
+
+In traditional public blockchains and standard procurement platforms, all transactions, balances, and bids are transparent. This creates severe market distortions, including front-running, bid-sniping, supplier price discrimination, and leakage of confidential corporate bidding strategies. Organizations seeking to run honest, competitive sealed-bid auctions are forced to rely on centralized escrow intermediaries that can be compromised or act dishonestly.
+
+**Bidveil** solves this fundamental dilemma by providing a decentralized, zero-knowledge confidential sealed-bidding and procurement platform on the Midnight Network. Using Compact smart contracts, enterprises and suppliers can issue tenders, submit binding competitive bids, and enforce minimum reserve thresholds with mathematical certainty while keeping individual bid valuations 100% confidential.
+
+By combining browser-local zero-knowledge proof generation via the Lace Midnight DApp Connector with Midnight's dual-state (public ledger + private witness) architecture, Bidveil enables verifiable, collusion-resistant enterprise auctions without revealing underlying financial metrics to competitors, validators, or the public.
 
 ## Privacy Model
-- **PUBLIC:**
-  - Public ledger state (`counter`), representing aggregated public tender state and on-chain verified output metrics.
-  - Contract verification keys and transaction hashes.
-- **PRIVATE:**
-  - Private circuit witness inputs (`secretDelta`), which remain strictly on the user's local device.
-  - Individual bidder inputs and secret tender numbers.
-- **PROVED without revealing:**
-  - Proves that the state update satisfies Compact circuit rules and arithmetic constraints without disclosing the private witness input value.
 
-## Privacy Claim
-**What an on-chain observer sees:** An observer scanning the Midnight blockchain or indexer sees only valid state transitions, zero-knowledge proofs, and the resulting public ledger counter state.
-
-**What an on-chain observer CANNOT see:** An observer cannot inspect, reverse-engineer, or deduce the bidder's private witness input (`secretDelta`), as the private input never leaves the user's browser client and is never written to the blockchain.
+- **What is PUBLIC (on-chain, anyone can see):**
+  - Public ledger state: `reservePrice` (minimum qualifying tender amount), `bidCount` (total count of verified bids), `highestDisclosedBid` (disclosed winning metric upon settlement), and `isOpen` (tender status).
+  - Deployed contract verification keys and transaction hashes on Midnight Preprod.
+- **What is PRIVATE (private witness, never on-chain):**
+  - Private witness inputs: `secretBidAmount()` and `secretBidSalt()`.
+  - Individual supplier pricing, unit cost calculations, and bidding amounts, which remain strictly inside local browser memory.
+- **What the user PROVES without revealing:**
+  - Proves that the confidential bid amount satisfies the condition `secretBidAmount >= reservePrice` and that the procurement tender is currently open, without disclosing the numerical value of `secretBidAmount`.
 
 ## Tech Stack
-Midnight network, Compact, Midnight.js SDK, React/Vite, Lace wallet, GitHub Actions CI/CD
+
+- **Smart Contract Language:** Compact (v0.33 toolchain / v0.23+ language spec)
+- **Zero-Knowledge Runtime:** `@midnight-ntwrk/compact-runtime` (v0.18.0-rc.1)
+- **Wallet & DApp Connector:** Lace Midnight Wallet (`@midnight-ntwrk/dapp-connector-api`)
+- **Frontend Framework:** React 19, TypeScript, Vite, Tailwind CSS, Lucide Icons
+- **CI/CD:** GitHub Actions (automated Compact installer, contract compilation, unit tests, and production build)
 
 ## Prerequisites
-- Lace Midnight Wallet extension installed in browser
-- Node.js v22+
-- Docker Desktop (for local proof server testing)
+
+- **Lace Midnight Wallet extension** (configured for Midnight Preprod)
+- **Node.js v22+**
+- **Docker Desktop** (optional, for local proof server or indexer testing)
 
 ## Setup & Run Locally
+
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/xynezakg/Midnight-Xyn.git
@@ -50,35 +57,42 @@ Midnight network, Compact, Midnight.js SDK, React/Vite, Lace wallet, GitHub Acti
    npm install
    ```
 
-3. **Compile Compact contract:**
+3. **Compile Compact smart contracts:**
    ```bash
    npm run compile
    ```
 
-4. **Start local dev server:**
+4. **Start the local development server:**
    ```bash
    npm run dev
    ```
 
-5. **Build for production:**
+5. **Build the production frontend bundle:**
    ```bash
    npm run build
    ```
 
 ## Run Tests
+
+Run the automated substantive unit test suite covering circuit logic, privacy constraints, and state transitions:
+
 ```bash
 npm test
 ```
 
 ## CI/CD
-The project features an automated GitHub Actions CI/CD pipeline defined in `.github/workflows/ci.yml`. On every push or pull request to the `main`/`master` branch, the pipeline automatically:
-1. Checks out the code repository.
-2. Configures a Node.js v22 environment.
-3. Downloads and installs the official Compact compiler (`compact 0.5.1`).
-4. Installs project dependencies (`npm ci`).
-5. Compiles Compact smart contracts (`npm run compile`).
-6. Executes the 3+ unit test suite verifying circuit logic, state transitions, and witness privacy (`npm test`).
-7. Builds the production frontend bundle (`npm run build`).
 
-## Product Proposal
-See [PROPOSAL.md](PROPOSAL.md)
+The repository features an automated GitHub Actions CI/CD workflow at `.github/workflows/ci.yml`. On every push and pull request to `main` and `master`, the workflow:
+1. Provisions a clean Node.js v22 environment.
+2. Installs the official Compact compiler toolchain (`compact`).
+3. Compiles `contracts/bidveil.compact` and outputs verification keys into `managed/bidveil/`.
+4. Executes the unit test suite verifying zero-knowledge constraints and state isolation (`npm test`).
+5. Validates the Vite production build (`npm run build`).
+
+## Usage Guide
+
+See [docs/USAGE.md](docs/USAGE.md) for a step-by-step user guide and troubleshooting tips.
+
+## Product X Profile
+
+`https://x.com/bidveil_zk` *(Created for Midnight Builder Challenge Level 4)*

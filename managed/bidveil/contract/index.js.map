@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../",
+  "sources": ["contracts/bidveil.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAAA;;;;;;;;;;;;;MAiCA,AAAA,gBAKC;;;;;cAL+B,SAAiB;;;;;;;;;;;;;;;;;;yCAAjB,SAAiB;;;;;;;;;wDAAjB,SAAiB;;;;OAKhD;MAED,AAAA,eAKC;;;;;;;;;;;;;;;;;;;;;;;OAAA;MAED,AAAA,kBAQC;;;;;cARiC,KAAa;;;;;;;;;;;;;;;;;;yCAAb,KAAa;;;;;;;;;0DAAb,KAAa;;;;OAQ9C;MAED,AAAA,WAEC;;;;;;;;;;;;;;;;;;;;;;;OAAA;MAED,AAAA,WAKC;;;;;;;;;;;;;;;;;;;;;;;OAAA;;;;;;;;;;;;;;;;GACA;EAnED;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAyBA;;;;;;;;;yEAAqC;IACrC;;;;;;;;;yEAAiC;IACjC;;;;;;;;;yEAA4C;IAC5C;;;;;;;;;yEAA8B;;;;;;;GAuC7B;EArCD,AAAA,kBAAoC;;0DAApC,eAAoC;;;;;;;;;;;;;;GAAA;EAGpC,AAAA,yBAKC,4BAL+B,SAAiB;IAC7C;;;;;;;2HAAwB,SAAO;;yEAAnB;UACZ,KAAQ;IAAR;;;;;;;2HAAA,KAAQ;;yEAAA;UACR,KAAmB;IAAnB;;;;;;;2HAAA,KAAmB;;yEAAA;IACnB;;;;;;;;;yEAAM;;GACT;EAED,AAAA,wBAKC;oDAJU;;;;;;;;;;;yHAAM;;UACP,KAAuB;4BACtB,KAAG;;oDAAI;;;;;;;;;;;yHAAY;;UAC1B,KAAQ;;;;;6CAAI;;;;;;;;;;;kHAAQ;;;IAApB;;;;;;;2HAAA,KAAQ;;yEAAA;;GACX;EAED,AAAA,2BAQC,4BARiC,KAAa;oDACpC;;;;;;;;;;;yHAAM;;UACP,cAA4B,GAAJ,KAAG;4BAC1B,cAAY;;oDAAI;;;;;;;;;;;yHAAY;;UACnC,KAAQ;;;;;6CAAI;;;;;;;;;;;kHAAQ;;;IAApB;;;;;;;2HAAA,KAAQ;;yEAAA;QACJ,cAAY;;gCAAG;;;;;;;;;;;qGAAmB;;MAClC;;;;;;;6HAAsB,cAAY;;2EAAf;;;GAE1B;EAED,AAAA,oBAEC;IADG;;;;;;;;;yEAAM;;GACT;EAED,AAAA,oBAKC;UAJG,KAAY;IAAZ;;;;;;;2HAAA,KAAY;;yEAAA;UACZ,KAAQ;IAAR;;;;;;;2HAAA,KAAQ;;yEAAA;UACR,KAAmB;IAAnB;;;;;;;2HAAA,KAAmB;;yEAAA;IACnB;;;;;;;;;yEAAM;;GACT;;;;;;;;;;;;;;;;IAzCD;qCAAA;;;;;;;;;;;0GAAqC;KAAA;IACrC;qCAAA;;;;;;;;;;;0GAAiC;KAAA;IACjC;qCAAA;;;;;;;;;;;0GAA4C;KAAA;IAC5C;qCAAA;;;;;;;;;;;0GAA8B;KAAA;;;;;;;;;;;;;;;;;;;;"
+}
