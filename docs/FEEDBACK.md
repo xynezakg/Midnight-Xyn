@@ -23,8 +23,8 @@ The public Google Form captures the following mandatory and exploratory question
 9. **What improvements would you like to see in upcoming versions?** *(Paragraph)*
 
 ### Public Links & Data Exports:
-- **Live Google Form**: [Bidveil User Feedback Survey Form](https://docs.google.com/forms/d/e/1FAIpQLScX-bidveil-user-validation/viewform)
-- **Public Google Sheets / Excel Export**: [Bidveil Preprod Tester Responses (Public Spreadsheet)](https://docs.google.com/spreadsheets/d/1Bidveil_Preprod_User_Feedback_Responses_2026/edit?usp=sharing)
+- **Live Google Form**: [Bidveil User Feedback Survey Form (Google Forms)](https://forms.gle/JS3LoCsJGQGh144n9)
+- **Public Google Sheets / Excel Export**: [Bidveil Preprod Tester Responses (Public Spreadsheet)](https://docs.google.com/spreadsheets/d/1WpDsI_xM6REz3oA3sWqv5Smv5vBbH9VOmJW8XtKJZ8c/edit?usp=sharing)
 - **Repository CSV File**: [`docs/feedback_responses.csv`](feedback_responses.csv) (Includes all 52 timestamped responses)
 
 ---

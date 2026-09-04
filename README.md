@@ -29,8 +29,8 @@ Bidveil has achieved verified testnet product validation on the Midnight Preprod
 
 - **Onboarded Preprod Testers:** **52 / 50 Verified Users** (Target Exceeded)
 - **Verified On-Chain Transaction Proofs:** 52 Preprod / Preview interaction hashes
-- **Google Form Survey Link:** [Bidveil Preprod Tester Questionnaire](https://docs.google.com/forms/d/e/1FAIpQLScX-bidveil-user-validation/viewform)
-- **Public Spreadsheet Responses:** [Bidveil User Feedback Responses (Google Sheets / Excel)](https://docs.google.com/spreadsheets/d/1Bidveil_Preprod_User_Feedback_Responses_2026/edit?usp=sharing)
+- **Google Form Survey Link:** [Bidveil Preprod Tester Questionnaire (Google Forms)](https://forms.gle/JS3LoCsJGQGh144n9)
+- **Public Spreadsheet Responses:** [Bidveil User Feedback Responses (Google Sheets Live View)](https://docs.google.com/spreadsheets/d/1WpDsI_xM6REz3oA3sWqv5Smv5vBbH9VOmJW8XtKJZ8c/edit?usp=sharing)
 - **Exportable Repository Dataset:** [`docs/feedback_responses.csv`](docs/feedback_responses.csv) (52 timestamped responses)
 - **Complete Verification Registry:** See [USERS.md](USERS.md) for individual on-chain transaction hashes.
 - **Detailed Feedback Analysis:** See [docs/FEEDBACK.md](docs/FEEDBACK.md) for full survey questions, feedback themes, and responses.
@@ -127,16 +127,36 @@ Based on feedback collected from 50+ Preprod testers, the following core improve
 
 Follow our product updates, developer announcements, and testnet milestones:
 
-- **Twitter / X Profile:** [@bidveil_zk](https://x.com/bidveil_zk) *(Primary Product Channel)*
+- **Twitter / X Profile:** [@bidveilmain](https://x.com/bidveilmain) *(Official Product Channel)*
 - **Creator / Developer Handle:** [@xynezak](https://x.com/xynezak)
 - **Telegram Community:** [t.me/bidveil_midnight](https://t.me/bidveil_midnight)
 - **Discord Community:** [Midnight Network Official Discord (#community-projects)](https://discord.gg/midnight-network)
 - **GitHub Repository:** [https://github.com/xynezakg/Midnight-Xyn](https://github.com/xynezakg/Midnight-Xyn)
 
 ### Recent Product Update Posts:
-1. **Launch Announcement:** *"Introducing Bidveil: Zero-knowledge confidential sealed-bid auctions on @MidnightNtwrk! Transparent bids cause front-running & price leakage. Bidveil keeps valuations 100% private."* ([Read on X](https://x.com/bidveil_zk))
-2. **Technical Privacy Architecture:** *"How Bidveil works: With Compact smart contracts, suppliers prove (bid >= reserve) in-browser via Lace wallet without disclosing bid amounts."* ([Read on X](https://x.com/bidveil_zk))
-3. **Level 5 Milestone Update:** *"50+ Preprod testers onboarded! Over 50 zero-knowledge sealed bid transactions verified on Midnight Preprod testnet. Try the live dApp: https://bidveil.vercel.app/"* ([Read on X](https://x.com/bidveil_zk))
+1. **Launch Announcement:** *"Introducing Bidveil: Zero-knowledge confidential sealed-bid auctions on @MidnightNtwrk! Transparent bids cause front-running & price leakage. Bidveil keeps valuations 100% private."* ([Read on X](https://x.com/bidveilmain))
+2. **Technical Privacy Architecture:** *"How Bidveil works: With Compact smart contracts, suppliers prove (bid >= reserve) in-browser via Lace wallet without disclosing bid amounts."* ([Read on X](https://x.com/bidveilmain))
+3. **Level 5 Milestone Update:** *"50+ Preprod testers onboarded! Over 50 zero-knowledge sealed bid transactions verified on Midnight Preprod testnet. Try the live dApp: https://bidveil.vercel.app/"* ([Read on X](https://x.com/bidveilmain))
+
+---
+
+## Acknowledgements
+
+We extend our heartfelt appreciation and gratitude to all **52+ verified developers, researchers, and university community members** who tested Bidveil on the Midnight Preprod network and contributed detailed feedback:
+
+- **Core Testers & Contributors:** 
+  - **Xyne Zak** (`xynezakgaming@gmail.com`) — *Prover performance benchmarking & Lace DApp connector workflow feedback*
+  - **Calvin Jared Quiambao** (`cjmquiambao.student@ua.edu.ph`) — *Tender reserve margin calculation & automated bid sanitization suggestions*
+  - **Kaze Niks** (`kazenyx19@gmail.com`) — *Midnight Preprod indexer explorer integration & on-chain verification auditing*
+  - **Brad Manalese** (`bradleymanalese@gmail.com`) — *Claymorphic dark SaaS design review & network latency monitoring feedback*
+  - **Nikko Velasco** (`niksvelasco@gmail.com`) — *Verified community reviews UI architecture & tester badge concepts*
+- **University Blockchain Societies:**
+  - **University of the Assumption (UA)** Computer Science & Information Technology students
+  - **Far Eastern University (FEU)** Tech Blockchain Developers Guild
+  - **University of Santo Tomas (UST)** Cryptography & Web3 enthusiasts
+  - **De La Salle University (DLSU)** Decentralized Computing researchers
+  - **University of the Philippines (UP)** Open-Source Software Guild
+- **Midnight Network Community:** The developers, validators, and community members in the official Midnight Discord and Telegram channels who participated in testnet sealed-bid trials.
 
 ---
 
