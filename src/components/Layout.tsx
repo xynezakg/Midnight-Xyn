@@ -1,11 +1,11 @@
 import React from 'react';
-import { ShieldCheck, Activity, Compass, LayoutDashboard, Code2, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Activity, Compass, LayoutDashboard, MessageSquareQuote, Code2, ExternalLink } from 'lucide-react';
 import { BIDVEIL_CONTRACT_CONFIG } from '../utils/contract';
 
 interface LayoutProps {
   children: React.ReactNode;
-  activeTab: 'landing' | 'terminal';
-  onTabChange: (tab: 'landing' | 'terminal') => void;
+  activeTab: 'landing' | 'terminal' | 'feedback';
+  onTabChange: (tab: 'landing' | 'terminal' | 'feedback') => void;
   isConnected: boolean;
   network: string;
 }
@@ -77,6 +77,21 @@ export const Layout: React.FC<LayoutProps> = ({
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5"></span>
                 )}
               </button>
+
+              <button
+                onClick={() => onTabChange('feedback')}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  activeTab === 'feedback'
+                    ? 'clay-button-primary text-white shadow-md'
+                    : 'text-gray-400 hover:text-gray-200'
+                }`}
+              >
+                <MessageSquareQuote className="w-3.5 h-3.5" />
+                Community & Feedback
+                <span className="px-1.5 py-0.2 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-mono">
+                  52
+                </span>
+              </button>
             </nav>
 
             {/* Top Right Actions */}
@@ -93,12 +108,20 @@ export const Layout: React.FC<LayoutProps> = ({
                 >
                   Launch App
                 </button>
+              ) : activeTab === 'terminal' ? (
+                <button
+                  onClick={() => onTabChange('feedback')}
+                  className="px-3.5 py-2 rounded-xl clay-button-secondary text-gray-300 font-semibold text-xs flex items-center gap-1.5"
+                >
+                  <MessageSquareQuote className="w-3.5 h-3.5" />
+                  Community Reviews
+                </button>
               ) : (
                 <button
-                  onClick={() => onTabChange('landing')}
-                  className="px-3.5 py-2 rounded-xl clay-button-secondary text-gray-300 font-semibold text-xs"
+                  onClick={() => onTabChange('terminal')}
+                  className="px-4 py-2 rounded-xl clay-button-primary text-white font-bold text-xs shadow-lg"
                 >
-                  Landing Page
+                  Back to Terminal
                 </button>
               )}
             </div>
@@ -125,8 +148,8 @@ export const Layout: React.FC<LayoutProps> = ({
 
             <div className="flex items-center gap-6 text-xs text-gray-400">
               <button onClick={() => onTabChange('landing')} className="hover:text-white transition-colors">About</button>
-              <button onClick={() => onTabChange('landing')} className="hover:text-white transition-colors">How it works</button>
               <button onClick={() => onTabChange('terminal')} className="hover:text-white transition-colors">Terminal</button>
+              <button onClick={() => onTabChange('feedback')} className="hover:text-white transition-colors">Community Reviews (52)</button>
               <a href="https://github.com/xynezakg/Midnight-Xyn" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
                 <Code2 className="w-3.5 h-3.5" /> GitHub
               </a>

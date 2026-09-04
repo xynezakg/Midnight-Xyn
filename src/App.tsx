@@ -3,10 +3,11 @@ import { Layout } from './components/Layout';
 import { WalletConnect } from './components/WalletConnect';
 import { SealedBidding } from './components/SealedBidding';
 import { LandingPage } from './components/LandingPage';
+import { CommunityFeedback } from './components/CommunityFeedback';
 import { useMidnight } from './hooks/useMidnight';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'landing' | 'terminal'>('terminal');
+  const [activeTab, setActiveTab] = useState<'landing' | 'terminal' | 'feedback'>('terminal');
 
   const {
     isConnected,
@@ -39,6 +40,11 @@ export const App: React.FC = () => {
           onLaunchTerminal={() => setActiveTab('terminal')}
           contractAddress={contractAddress}
           network={network}
+        />
+      ) : activeTab === 'feedback' ? (
+        <CommunityFeedback
+          isConnected={isConnected}
+          walletAddress={walletAddress}
         />
       ) : (
         <div className="space-y-6">
