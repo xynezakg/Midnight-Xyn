@@ -145,7 +145,7 @@ export const SealedBidding: React.FC<SealedBiddingProps> = ({
               <h3 className="text-lg font-bold text-gray-100">Zero-Knowledge Sealed Bidding</h3>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Compact ZK v0.33
+                Compact ZK v0.34
               </span>
             </div>
             <p className="text-xs text-gray-400 mt-1">

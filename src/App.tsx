@@ -3,11 +3,11 @@ import { Layout } from './components/Layout';
 import { WalletConnect } from './components/WalletConnect';
 import { SealedBidding } from './components/SealedBidding';
 import { LandingPage } from './components/LandingPage';
-import { CommunityFeedback } from './components/CommunityFeedback';
 import { useMidnight } from './hooks/useMidnight';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'landing' | 'terminal' | 'feedback'>('terminal');
+  // Default to the complete SaaS Landing experience with Hero, About, How It Works, Feedbacks, and Docs
+  const [activeTab, setActiveTab] = useState<'landing' | 'terminal'>('landing');
 
   const {
     isConnected,
@@ -41,13 +41,22 @@ export const App: React.FC = () => {
           contractAddress={contractAddress}
           network={network}
         />
-      ) : activeTab === 'feedback' ? (
-        <CommunityFeedback
-          isConnected={isConnected}
-          walletAddress={walletAddress}
-        />
       ) : (
         <div className="space-y-6">
+          {/* Header Banner to return to SaaS Homepage */}
+          <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div>
+              <h2 className="text-base font-bold text-white">Bidveil Bidding Terminal</h2>
+              <p className="text-xs text-slate-400">Zero-Knowledge Sealed-Bid Execution Environment</p>
+            </div>
+            <button
+              onClick={() => setActiveTab('landing')}
+              className="px-3.5 py-1.5 rounded-xl saas-button-secondary text-xs font-semibold"
+            >
+              &larr; Back to Overview
+            </button>
+          </div>
+
           {/* Wallet Connection Card */}
           <WalletConnect
             isConnected={isConnected}
