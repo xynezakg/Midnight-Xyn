@@ -126,12 +126,12 @@ export const WalletConnect: React.FC<WalletConnectProps> = ({
                 {isConnecting ? (
                   <>
                     <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    Connecting Lace...
+                    Awaiting Lace Approval...
                   </>
                 ) : (
                   <>
                     <Wallet className="w-3.5 h-3.5" />
-                    Connect Lace
+                    Connect Live Lace
                   </>
                 )}
               </button>

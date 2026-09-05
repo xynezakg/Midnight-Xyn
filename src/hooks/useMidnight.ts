@@ -29,7 +29,7 @@ export function useMidnight() {
     bidCount: 3n,
     reservePrice: 100_000n,
     isOpen: true,
-    balance: '5,000.00 tNIGHT',
+    balance: '0.00 tNIGHT',
     isProving: false,
     txHash: null,
     isExtensionDetected: false,
@@ -56,7 +56,7 @@ export function useMidnight() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Connect to Wallet (Attempts live Lace extension, auto-falls back to Preprod Testnet session if locked/timeout)
+  // Connect to Live Lace Midnight Wallet
   const connectWallet = useCallback(async () => {
     setState((prev) => ({ ...prev, isConnecting: true, error: null }));
 
@@ -65,78 +65,117 @@ export function useMidnight() {
       const midnightObj = win?.midnight;
       const cardanoObj = win?.cardano;
 
-      // Check for Midnight DApp Connector
+      // Check for Midnight DApp Connector (prioritize official Midnight endpoints)
       const connector = 
         midnightObj?.mnLace || 
         midnightObj?.lace || 
         midnightObj?.['midnight-lace'] ||
         (cardanoObj?.lace && typeof cardanoObj.lace.enable === 'function' ? cardanoObj.lace : null);
 
-      if (connector) {
-        console.log('[Bidveil] Requesting Lace Midnight connection...');
+      if (!connector) {
+        throw new Error('Lace extension not detected in this browser window. Please make sure Lace is installed and enabled.');
+      }
 
-        // 3.5s timeout race: if Lace extension is locked or backgrounded, gracefully connect via Preprod Testnet session
-        const enablePromise = connector.enable();
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Lace extension pending or locked')), 3500)
-        );
+      console.log('[Bidveil Live Lace] Found connector. Requesting user permission in Lace...');
 
-        const api = await Promise.race([enablePromise, timeoutPromise]) as any;
+      // 45-second generous timeout to give user plenty of time to view the popup, enter password, and click approve
+      const enablePromise = connector.enable();
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Connection request timed out. Please check if your Lace extension has a pending authorization popup.')), 45000)
+      );
 
-        let address: string | null = null;
-        let fetchedBalance = '5,000.00 tNIGHT';
+      const api = await Promise.race([enablePromise, timeoutPromise]) as any;
+      console.log('[Bidveil Live Lace] Connection approved! API received:', api);
 
-        if (typeof api?.state === 'function') {
+      let address: string | null = null;
+      let fetchedBalance = '0.00 tNIGHT';
+
+      // Query state from the active Lace session
+      if (typeof api?.state === 'function') {
+        try {
           const walletState = await api.state();
+          console.log('[Bidveil Live Lace] walletState:', walletState);
           address = walletState?.address || walletState?.unshieldedAddress || walletState?.shieldedAddress;
           
-          const rawBal = walletState?.balances?.tNIGHT ?? walletState?.balance;
-          if (rawBal !== undefined && rawBal !== null) {
-            const numBal = Number(rawBal);
-            fetchedBalance = numBal === 0 ? '0.00 tNIGHT' : `${numBal.toLocaleString()} tNIGHT`;
+          if (walletState?.balances) {
+            const entries = Object.entries(walletState.balances);
+            if (entries.length > 0) {
+              const [tokenName, tokenAmount] = entries[0];
+              const num = Number(tokenAmount);
+              fetchedBalance = `${num.toLocaleString()} ${tokenName}`;
+            }
+          } else if (walletState?.balance !== undefined && walletState?.balance !== null) {
+            const numBal = Number(walletState.balance);
+            fetchedBalance = `${numBal.toLocaleString()} tNIGHT`;
           }
-        } else if (typeof api?.getAddress === 'function') {
+        } catch (stateErr) {
+          console.warn('[Bidveil Live Lace] api.state() error:', stateErr);
+        }
+      }
+
+      // Address query fallbacks
+      if (!address) {
+        if (typeof api?.getAddress === 'function') {
           address = await api.getAddress();
         } else if (typeof api?.getUnshieldedAddress === 'function') {
           address = await api.getUnshieldedAddress();
+        } else if (typeof api?.getChangeAddress === 'function') {
+          address = await api.getChangeAddress();
         } else if (typeof api?.getUsedAddresses === 'function') {
           const addrs = await api.getUsedAddresses();
           address = addrs && addrs.length > 0 ? addrs[0] : null;
         }
-
-        if (!address) {
-          address = 'mn_addr_preprod1gam0h6908lngtck75x3gzze30hsrkyzkmgxjfz26lh3cp6d7g7gs30qyna';
-        }
-
-        setState((prev) => ({
-          ...prev,
-          isConnected: true,
-          walletAddress: address,
-          balance: fetchedBalance,
-          isConnecting: false,
-          error: null,
-          isExtensionDetected: true,
-          connectionType: 'lace',
-        }));
-        return;
       }
-    } catch (err: any) {
-      console.warn('[Bidveil] Lace extension not responding or locked, automatically using Preprod Testnet session:', err);
-    }
 
-    // Auto-fallback: Connect seamlessly in verified Preprod Testnet Mode so the user is NEVER blocked
-    setState((prev) => ({
-      ...prev,
-      isConnected: true,
-      walletAddress: 'mn_addr_preprod1gam0h6908lngtck75x3gzze30hsrkyzkmgxjfz26lh3cp6d7g7gs30qyna',
-      balance: '5,000.00 tNIGHT',
-      isConnecting: false,
-      error: null,
-      connectionType: 'sandbox',
-    }));
+      // Balance query fallbacks
+      if (fetchedBalance === '0.00 tNIGHT' && typeof api?.getBalance === 'function') {
+        try {
+          const rawBal = await api.getBalance();
+          console.log('[Bidveil Live Lace] api.getBalance():', rawBal);
+          if (rawBal !== undefined && rawBal !== null) {
+            const numBal = Number(rawBal);
+            fetchedBalance = `${numBal.toLocaleString()} tNIGHT`;
+          }
+        } catch (balErr) {
+          console.warn('[Bidveil Live Lace] api.getBalance() error:', balErr);
+        }
+      }
+
+      console.log('[Bidveil Live Lace] Successfully connected. Real address:', address, 'Real balance:', fetchedBalance);
+
+      setState((prev) => ({
+        ...prev,
+        isConnected: true,
+        walletAddress: address || 'mn_addr_preprod1...',
+        balance: fetchedBalance,
+        isConnecting: false,
+        error: null,
+        isExtensionDetected: true,
+        connectionType: 'lace',
+      }));
+
+    } catch (err: any) {
+      console.error('[Bidveil Live Lace] Connection failed:', err);
+
+      const isUserReject = 
+        err?.message?.toLowerCase().includes('reject') || 
+        err?.message?.toLowerCase().includes('cancel') ||
+        err?.code === 4001 ||
+        err?.code === -32603;
+
+      const userFriendlyMsg = isUserReject
+        ? 'Connection was cancelled in the Lace extension. Click "Connect Live Lace" to try again.'
+        : (err?.message || 'Failed to connect to Lace. Please ensure Lace is unlocked and on Midnight Preprod.');
+
+      setState((prev) => ({
+        ...prev,
+        isConnecting: false,
+        error: userFriendlyMsg,
+      }));
+    }
   }, []);
 
-  // Instant Preprod Sandbox Connect
+  // Instant Preprod Sandbox Connect (Only used if user explicitly clicks Sandbox button)
   const connectSandbox = useCallback(() => {
     setState((prev) => ({
       ...prev,
