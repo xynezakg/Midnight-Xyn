@@ -62,10 +62,25 @@ export const LandingPage: React.FC<LandingProps> = ({
         {/* Subtle Backdrop Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
-        {/* Announcement Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-indigo-300 text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Midnight Network {network} • Compact v0.34 Toolchain</span>
+        {/* Brand Logo & Announcement Pill */}
+        <div className="flex flex-col items-center gap-3">
+          <div className="relative group">
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500"></div>
+            <img 
+              src="/logo.jpg" 
+              alt="Bidveil Logo" 
+              className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-700/80 shadow-2xl"
+              onError={(e) => {
+                // Fallback to docs/images/logo.jpg
+                (e.target as HTMLImageElement).src = 'docs/images/logo.jpg';
+              }}
+            />
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-indigo-300 text-xs font-semibold shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <span>Midnight Network {network} • Compact v0.34 Toolchain</span>
+          </div>
         </div>
 
         {/* Main Headline */}

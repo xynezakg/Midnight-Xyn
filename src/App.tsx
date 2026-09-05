@@ -23,7 +23,9 @@ export const App: React.FC = () => {
     isOpen,
     isProving,
     txHash,
+    connectionType,
     connectWallet,
+    connectSandbox,
     disconnectWallet,
     executeCircuitCall,
   } = useMidnight();
@@ -66,7 +68,9 @@ export const App: React.FC = () => {
             isConnecting={isConnecting}
             isExtensionDetected={isExtensionDetected}
             error={error}
+            connectionType={connectionType}
             onConnect={connectWallet}
+            onConnectSandbox={connectSandbox}
             onDisconnect={disconnectWallet}
           />
 
